@@ -29,49 +29,61 @@ impl Peel {
         self
     }
 
+    pub fn reverse_with_numbers(&self, file: String) -> String {
+        file.split('\n')
+            .enumerate()
+            .map(|(k, v)| format!("{}: {}", k, v))
+            .collect::<Vec<String>>()
+            .join("\n")
+            .split('\n')
+            .rev()
+            .take(self.lines + 1)
+            .collect::<Vec<&str>>()
+            .join("\n")
+            .split('\n')
+            .rev()
+            .collect::<Vec<&str>>()
+            .join("\n")
+    }
+
+    pub fn reverse(&self, file: String) -> String {
+        file.split('\n')
+            .rev()
+            .take(self.lines + 1)
+            .collect::<Vec<&str>>()
+            .join("\n")
+            .split('\n')
+            .rev()
+            .collect::<Vec<&str>>()
+            .join("\n")
+    }
+
+    pub fn normal_with_numbers(&self, file: String) -> String {
+        file.split('\n')
+            .enumerate()
+            .map(|(k, v)| format!("{}: {}", k, v))
+            .collect::<Vec<String>>()
+            .join("\n")
+            .split('\n')
+            .take(self.lines + 1)
+            .collect::<Vec<&str>>()
+            .join("\n")
+    }
+
+    pub fn normal(&self, file: String) -> String {
+        file.split('\n')
+            .take(self.lines)
+            .collect::<Vec<&str>>()
+            .join("\n")
+    }
+
     pub fn contents(&self) -> String {
         match fs::read_to_string(self.input.clone()) {
             Ok(file) => match (self.nums, self.reverse) {
-                (true, true) => file
-                    .split('\n')
-                    .enumerate()
-                    .map(|(k, v)| format!("{}: {}", k, v))
-                    .collect::<Vec<String>>()
-                    .join("\n")
-                    .split('\n')
-                    .rev()
-                    .take(self.lines + 1)
-                    .collect::<Vec<&str>>()
-                    .join("\n")
-                    .split('\n')
-                    .rev()
-                    .collect::<Vec<&str>>()
-                    .join("\n"),
-                (_, true) => file
-                    .split('\n')
-                    .rev()
-                    .take(self.lines + 1)
-                    .collect::<Vec<&str>>()
-                    .join("\n")
-                    .split('\n')
-                    .rev()
-                    .collect::<Vec<&str>>()
-                    .join("\n"),
-                (true, _) => file
-                    .split('\n')
-                    .enumerate()
-                    .map(|(k, v)| format!("{}: {}", k, v))
-                    .collect::<Vec<String>>()
-                    .join("\n")
-                    .split('\n')
-                    .take(self.lines + 1)
-                    .collect::<Vec<&str>>()
-                    .join("\n"),
-                (_, _) => file
-                    .split('\n')
-                    .take(self.lines)
-                    .collect::<Vec<&str>>()
-                    .join("\n"),
+                (true, true) => self.reverse_with_numbers(file),
+                (_, true) => self.reverse(file),
+                (true, _) => self.normal_with_numbers(file),
+                (_, _) => self.normal(file),
             },
             Err(e) => {
                 println!("{}", e);
