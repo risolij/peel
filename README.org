@@ -26,7 +26,7 @@ cargo run -- -i flake.nix -l 15 -v -r
 }
 #+end_example
 
-*** 15 lines on =flake.nix= with line numbers
+*** 20 lines on =flake.nix= with line numbers
 #+begin_src sh
 cargo run -- -i flake.nix -l 20 -n
 #+end_src
