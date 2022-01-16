@@ -40,18 +40,6 @@ impl Peel {
         file.join("\n")
     }
 
-    pub fn reverse_with_numbers(&self, file: String) -> String {
-        file.split('\n')
-            .rev()
-            .take(self.lines)
-            .collect::<Vec<&str>>()
-            .join("\n")
-            .split('\n')
-            .rev()
-            .collect::<Vec<&str>>()
-            .join("\n")
-    }
-
     pub fn reverse(&self, file: String) -> String {
         file.split('\n')
             .rev()
@@ -60,13 +48,6 @@ impl Peel {
             .join("\n")
             .split('\n')
             .rev()
-            .collect::<Vec<&str>>()
-            .join("\n")
-    }
-
-    pub fn normal_with_numbers(&self, file: String) -> String {
-        file.split('\n')
-            .take(self.lines)
             .collect::<Vec<&str>>()
             .join("\n")
     }
@@ -81,9 +62,9 @@ impl Peel {
     pub fn contents(&self) -> String {
         match fs::read_to_string(self.input.clone()) {
             Ok(file) => match (self.nums, self.reverse) {
-                (true, true) => self.reverse_with_numbers(self.enumerate_file(file)),
+                (true, true) => self.reverse(self.enumerate_file(file)),
                 (_, true) => self.reverse(file),
-                (true, _) => self.normal_with_numbers(self.enumerate_file(file)),
+                (true, _) => self.normal(self.enumerate_file(file)),
                 (_, _) => self.normal(file),
             },
             Err(e) => {
