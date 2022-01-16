@@ -29,15 +29,21 @@ impl Peel {
         self
     }
 
+    pub fn enumerate_file(&self, file: String) -> String {
+        let mut file = file
+            .split('\n')
+            .enumerate()
+            .map(|(k, v)| format!("{}: {}", k + 1, v))
+            .collect::<Vec<String>>();
+
+        file.pop();
+        file.join("\n")
+    }
+
     pub fn reverse_with_numbers(&self, file: String) -> String {
         file.split('\n')
-            .enumerate()
-            .map(|(k, v)| format!("{}: {}", k, v))
-            .collect::<Vec<String>>()
-            .join("\n")
-            .split('\n')
             .rev()
-            .take(self.lines + 1)
+            .take(self.lines)
             .collect::<Vec<&str>>()
             .join("\n")
             .split('\n')
@@ -49,7 +55,7 @@ impl Peel {
     pub fn reverse(&self, file: String) -> String {
         file.split('\n')
             .rev()
-            .take(self.lines + 1)
+            .take(self.lines)
             .collect::<Vec<&str>>()
             .join("\n")
             .split('\n')
@@ -60,12 +66,7 @@ impl Peel {
 
     pub fn normal_with_numbers(&self, file: String) -> String {
         file.split('\n')
-            .enumerate()
-            .map(|(k, v)| format!("{}: {}", k, v))
-            .collect::<Vec<String>>()
-            .join("\n")
-            .split('\n')
-            .take(self.lines + 1)
+            .take(self.lines)
             .collect::<Vec<&str>>()
             .join("\n")
     }
@@ -80,9 +81,9 @@ impl Peel {
     pub fn contents(&self) -> String {
         match fs::read_to_string(self.input.clone()) {
             Ok(file) => match (self.nums, self.reverse) {
-                (true, true) => self.reverse_with_numbers(file),
+                (true, true) => self.reverse_with_numbers(self.enumerate_file(file)),
                 (_, true) => self.reverse(file),
-                (true, _) => self.normal_with_numbers(file),
+                (true, _) => self.normal_with_numbers(self.enumerate_file(file)),
                 (_, _) => self.normal(file),
             },
             Err(e) => {
