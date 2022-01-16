@@ -3,7 +3,7 @@
   A rust implementation of linux =head= and =tail= commands
 ** Examples
 
-*** Reverse 15 lines on =flake.nix=
+*** Reverse 15 lines on =flake.nix= with header
 #+begin_src sh
 cargo run -- -i flake.nix -l 15 -v -r
 #+end_src
