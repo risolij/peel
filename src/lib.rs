@@ -30,7 +30,7 @@ impl Peel {
     }
 
     pub fn contents(&self) -> String {
-        match std::fs::read_to_string(self.input.clone()) {
+        match fs::read_to_string(self.input.clone()) {
             Ok(file) => match (self.nums, self.reverse) {
                 (true, true) => file
                     .split('\n')
