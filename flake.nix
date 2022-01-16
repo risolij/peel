@@ -1,5 +1,5 @@
 {
-  description = "nix dashboard";
+  description = "Peel";
   nixConfig.bash-prompt = "\[nix-develop\]$ ";
 
   inputs = {

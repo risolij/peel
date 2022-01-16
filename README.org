@@ -33,7 +33,7 @@ cargo run -- -i flake.nix -l 20 -n
 
 #+begin_example
 0: {
-1:   description = "nix dashboard";
+1:   description = "Peel";
 2:   nixConfig.bash-prompt = "\[nix-develop\]$ ";
 3:
 4:   inputs = {
