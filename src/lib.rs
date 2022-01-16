@@ -30,7 +30,7 @@ impl Peel {
                 true => file
                     .split('\n')
                     .rev()
-                    .take(self.lines)
+                    .take(self.lines + 1)
                     .collect::<Vec<&str>>()
                     .join("\n")
                     .split('\n')
