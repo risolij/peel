@@ -1,0 +1,28 @@
+* Peel
+** Description
+  A rust implementation of linux =head= and =tail= commands
+** Sample run
+
+*** Command line
+#+begin_src sh
+cargo run -- -i flake.nix -l 15 -v -r
+#+end_src
+
+*** Output of the =flake.nix=
+#+begin_example
+----> flake.nix <----
+            jq
+            bat
+            gcc
+            openssl
+            tree
+            exa
+            (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+              extensions = ["rust-src"];
+            }))
+          ];
+        };
+      }
+    );
+}
+#+end_example
