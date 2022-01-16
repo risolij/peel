@@ -1,14 +1,13 @@
 * Peel
 ** Description
   A rust implementation of linux =head= and =tail= commands
-** Sample run
+** Examples
 
-*** Command line
+*** Reverse 15 lines on =flake.nix=
 #+begin_src sh
 cargo run -- -i flake.nix -l 15 -v -r
 #+end_src
 
-*** Output of the =flake.nix=
 #+begin_example
 ----> flake.nix <----
             jq
@@ -25,4 +24,33 @@ cargo run -- -i flake.nix -l 15 -v -r
       }
     );
 }
+#+end_example
+
+*** 15 lines on =flake.nix= with line numbers
+#+begin_src sh
+cargo run -- -i flake.nix -l 20 -n
+#+end_src
+
+#+begin_example
+0: {
+1:   description = "nix dashboard";
+2:   nixConfig.bash-prompt = "\[nix-develop\]$ ";
+3:
+4:   inputs = {
+5:     nixpkgs.url      = "github:nixos/nixpkgs/nixos-unstable";
+6:     rust-overlay.url = "github:oxalica/rust-overlay";
+7:     flake-utils.url  = "github:numtide/flake-utils";
+8:   };
+9:
+10:   outputs = { self, nixpkgs, rust-overlay, flake-utils, ... }:
+11:     flake-utils.lib.eachDefaultSystem (system:
+12:       let
+13:         system = "x86_64-linux";
+14:         overlays = [ (import rust-overlay) ];
+15:         pkgs = import nixpkgs {
+16:           inherit system overlays;
+17:         };
+18:
+19:         lib = nixpkgs.lib;
+20:       in
 #+end_example
