@@ -33,7 +33,7 @@ impl Peel {
         let mut file = file
             .split('\n')
             .enumerate()
-            .map(|(k, v)| format!("{}: {}", k + 1, v))
+            .map(|(k, v)| format!("{}: {}", k  + 1, v))
             .collect::<Vec<String>>();
 
         file.pop();
