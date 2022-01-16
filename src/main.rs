@@ -6,6 +6,6 @@ mod lib;
 fn main() {
     let peel = Peel::from_args();
 
-    peel.print_header();
-    println!("{}", peel.contents());
+    let peel = peel.print_header().contents();
+    println!("{}", peel);
 }

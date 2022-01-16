@@ -18,10 +18,12 @@ pub struct Peel {
 }
 
 impl Peel {
-    pub fn print_header(&self) {
+    pub fn print_header(self) -> Self {
         if self.verbose == true {
             println!("----> {} <----", self.input);
-        }
+        };
+
+        self
     }
 
     pub fn contents(&self) -> String {
