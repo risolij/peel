@@ -42,25 +42,4 @@ cargo run -- -i flake.nix -l 15 -v -r
 cargo run -- -i flake.nix -l 20 -n
 #+end_src
 
-#+begin_example
-1: {
-2:   description = "Peel";
-3:   nixConfig.bash-prompt = "\[nix-develop\]$ ";
-4:
-5:   inputs = {
-6:     nixpkgs.url      = "github:nixos/nixpkgs/nixos-unstable";
-7:     rust-overlay.url = "github:oxalica/rust-overlay";
-8:     flake-utils.url  = "github:numtide/flake-utils";
-9:   };
-10:
-11:   outputs = { self, nixpkgs, rust-overlay, flake-utils, ... }:
-12:     flake-utils.lib.eachDefaultSystem (system:
-13:       let
-14:         system = "x86_64-linux";
-15:         overlays = [ (import rust-overlay) ];
-16:         pkgs = import nixpkgs {
-17:           inherit system overlays;
-18:         };
-19:
-20:         lib = nixpkgs.lib;
-#+end_example
+[[assets/picture.png]]
