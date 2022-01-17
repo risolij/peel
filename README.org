@@ -1,6 +1,17 @@
 * Peel
 ** Description
   A rust implementation of linux =head= and =tail= commands
+** How to test
+- Install [[https://nixos.org/download.html][nix]]
+- clone repo
+#+begin_src sh
+git clone https://github.com/risolij/peel.git
+#+end_src
+- run nix container in =project root= 
+#+begin_src sh
+nix develop
+#+end_src
+
 ** Examples
 
 *** Reverse 15 lines on =flake.nix= with header
