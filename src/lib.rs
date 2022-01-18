@@ -21,8 +21,9 @@ pub struct Peel {
 }
 
 impl Peel {
+    #[must_use]
     pub fn print_header(self) -> Self {
-        if self.verbose == true {
+        if self.verbose {
             println!("----> {} <----", self.input);
         };
 
