@@ -32,7 +32,7 @@ impl Peel {
 
     pub fn enumerate_file(&self, file: String) -> String {
         let mut file = file
-            .split('\n')
+            .lines()
             .enumerate()
             .map(|(k, v)| format!("{}: {}", k  + 1, v))
             .collect::<Vec<String>>();
@@ -42,19 +42,19 @@ impl Peel {
     }
 
     pub fn reverse(&self, file: String) -> String {
-        file.split('\n')
+        file
+            .lines()
             .rev()
             .take(self.lines)
             .collect::<Vec<&str>>()
-            .join("\n")
-            .split('\n')
+            .into_iter()
             .rev()
             .collect::<Vec<&str>>()
             .join("\n")
     }
 
     pub fn normal(&self, file: String) -> String {
-        file.split('\n')
+        file.lines()
             .take(self.lines)
             .collect::<Vec<&str>>()
             .join("\n")
